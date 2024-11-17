@@ -1,0 +1,107 @@
+/* Global Style for Body */
+body {
+    margin: 0; /* Hilangkan margin bawaan */
+    padding: 0; /* Hilangkan padding bawaan */
+    font-family: Arial, sans-serif; /* Atur font yang konsisten */
+    background-color: #e2e8f0; /* Ubah warna latar belakang halaman */
+    color: #333; /* Warna teks default */
+}
+
+/* Layout Container */
+.layout-container {
+    display: flex;
+    gap: 16px;
+    padding: 16px;
+    margin: 16px;
+    background-color: #e2e8f0; /* Warna latar belakang container tetap putih */
+    /* border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); */
+}
+
+/* Sidebar */
+.sidebar {
+    flex: 0 0 250px;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 20px;
+    height: fit-content;
+}
+
+.sidebar h3 {
+    font-size: 18px;
+    margin-bottom: 16px;
+    color: #333;
+    text-align: center;
+}
+
+.sidebar button {
+    display: block;
+    width: 100%;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 0;
+    margin-bottom: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar button:hover {
+    background-color: #0056b3;
+}
+
+/* Cards Layout */
+.cards-container-packages {
+    flex: 1; /* Ambil sisa ruang yang tersedia */
+    display: flex; /* Gunakan flexbox untuk tata letak */
+    flex-wrap: wrap; /* Izinkan elemen untuk membungkus ke baris baru */
+    justify-content: flex-start; /* Pastikan elemen diurutkan dari kiri ke kanan */
+    gap: 16px; /* Jarak antar kartu */
+    margin-top: 0;
+}
+
+/* Card */
+.card {
+    flex: 1 1 calc(25% - 16px); /* Atur agar kartu responsif dan menyesuaikan ukuran */
+    max-width: calc(25% - 16px); /* Maksimum lebar kartu */
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+    .card {
+        flex: 1 1 calc(33.33% - 16px); /* 3 kartu per baris pada layar medium */
+        max-width: calc(33.33% - 16px);
+    }
+}
+
+@media (max-width: 768px) {
+    .card {
+        flex: 1 1 calc(50% - 16px); /* 2 kartu per baris pada layar kecil */
+        max-width: calc(50% - 16px);
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        flex: 1 1 100%; /* 1 kartu per baris pada layar sangat kecil */
+        max-width: 100%;
+    }
+}
+

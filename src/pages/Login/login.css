@@ -1,0 +1,17 @@
+.login-container {
+	display: flex;
+	flex-direction: column; /* Stack content vertically */
+	justify-content: center; /* Center content along the main axis (vertically) */
+	min-height: 85vh; /* Ensure container takes up the full viewport height */
+	background-color: white; /* Set background color to white */
+  }
+  
+.header-brand h5 {
+	color: white;
+  }
+
+  .ant-layout-footer {
+	background-color: white; /* Set footer background to white */
+	text-align: center; /* Optional: to center the copyright text */
+  }
+  

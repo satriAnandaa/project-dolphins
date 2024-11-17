@@ -1,0 +1,50 @@
+.page-container-play {
+    padding: 24px;
+    background-color: #e2e8f0;
+    margin-left: 0;
+    width: 100%;
+  }
+  
+  .header-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px; /* Space below the header */
+  }
+  
+  .header-image {
+    width: 100%; /* Makes the image responsive */
+    height: 400px; /* Adjust height to make the header longer */
+    object-fit: cover; /* Ensures the image fills the height without distortion */
+    border-radius: 8px; /* Optional rounded corners */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for a premium look */
+  }
+  
+  .ant-list-item {
+    margin-bottom: 20px;
+  }
+  
+  .description-text {
+    display: block;
+    margin-top: 8px;
+    color: rgba(0, 0, 0, 0.6);
+  }
+  
+  .ant-card {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .ant-btn-link {
+    padding: 0;
+  }
+  
+  .ant-drawer-body {
+    background-color: #ffffff;
+    padding: 24px;
+  }
+  
+  .ant-select-dropdown {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+  }
+  

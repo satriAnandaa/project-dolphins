@@ -1,0 +1,158 @@
+.navbar {
+  height: 10vh;
+  background: linear-gradient(to right, #1b1919, #00aaff, #0077ff);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+}
+
+.navbar-logo {
+  color: white;
+  text-decoration: none;
+  font-size: 2.5rem; /* Slightly larger to make it stand out */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: auto;
+  font-family: 'Montserrat', sans-serif; /* Use a sleek, modern font */
+  font-weight: bold; /* Make the text bold for emphasis */
+  text-transform: uppercase; /* Uppercase letters for a more premium look */
+  letter-spacing: 2px; /* Slight spacing between letters */
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3), 0px 0px 15px rgba(0, 170, 255, 0.7); /* Soft shadow for a glowing effect */
+}
+
+.navbar-logo .GiDolphin {
+  margin-left: 8px; /* Space out the icon from the text */
+  color: #00aaff; /* Give the icon a color that matches the brand theme */
+  transition: transform 0.3s ease; /* Add animation effect on hover */
+}
+
+/* Hover effect for logo to give it a more interactive feel */
+.navbar-logo:hover .GiDolphin {
+  transform: rotate(360deg); /* Icon rotation when hovering */
+}
+
+
+.nav-items {
+  display: flex;
+  list-style: none;
+  text-align: center;
+  width: auto;
+  justify-content: flex-end;
+  margin-right: 2rem;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  height: 10vh;
+}
+
+.nav-item a {
+  text-decoration: none;
+  color: white;
+  font-size: 1.1rem;
+  margin-right: 2rem;
+  padding: 6px 16px;
+  border-radius: 5px;
+}
+
+.nav-item a:hover {
+  background: rgb(0, 212, 212);
+}
+
+/* Avatar and Profile Dropdown */
+.profile-dropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-left: 1rem;
+}
+
+.profile-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white;
+  transition: transform 0.2s ease;
+}
+
+.profile-avatar:hover {
+  transform: scale(1.1);
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background: white;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 10px 0;
+  z-index: 100;
+  min-width: 160px;
+  opacity: 0; /* Start with hidden and transparent */
+  visibility: hidden; /* Hide initially */
+  transition: opacity 0.3s ease, visibility 0s 0.3s; /* Smooth opacity transition */
+}
+
+.dropdown-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown-menu li {
+  padding: 10px 20px;
+  cursor: pointer;
+  color: #333;
+  transition: background 0.2s ease;
+}
+
+.dropdown-menu li:hover {
+  background: #f0f0f0;
+}
+
+/* Hover effect for profile avatar to display dropdown */
+.profile-dropdown:hover .dropdown-menu {
+  display: block;
+  opacity: 1; /* Fade in */
+  visibility: visible; /* Make visible after fade-in */
+  transition: opacity 0.3s ease, visibility 0s 0s; /* Smooth fade-in */
+}
+
+/* Add spacing to dropdown items */
+.dropdown-menu li + li {
+  border-top: 1px solid #f0f0f0;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    height: auto;
+    padding: 1rem;
+  }
+
+  .nav-items {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .nav-item a {
+    margin-right: 0;
+    padding: 10px 16px;
+    text-align: left;
+    width: 100%;
+  }
+
+  .profile-dropdown {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+}

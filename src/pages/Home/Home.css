@@ -1,0 +1,162 @@
+/* General Layout */
+.page-container {
+    padding: 24px;
+    background-color: #e2e8f0;
+    margin-left: 0;
+    width: 100%;
+}
+
+/* Header Styles */
+.header-home {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 16px;
+    margin-bottom: 20px;
+}
+
+.header-home-image {
+    width: 100%;
+    height: 400px; /* Increased height to make it taller */
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Special Offers Section */
+.special-offers-container {
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    padding: 0 20px; /* Added padding to make it more spacious */
+}
+
+.special-offers-title {
+    font-size: 36px; /* Increased font size */
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 12px; /* Added more space under title */
+}
+
+.special-offers-description {
+    font-size: 16px; /* Smaller font size for description */
+    color: rgba(0, 0, 0, 0.6);
+    margin: 0 auto;
+    max-width: 800px; /* Increased max-width for better readability */
+    line-height: 1.8; /* Increased line height for better spacing */
+}
+
+/* Cards Layout */
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.card {
+  width: calc(25% - 16px);
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+/* Card Image Styling */
+.card-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+/* Card Content */
+.card-content {
+    padding: 16px;
+    position: relative;
+}
+
+.rating {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #007bff;
+    margin: 8px 0;
+}
+
+.description {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.6);
+    margin-bottom: 8px;
+}
+
+.package {
+    font-size: 16px;
+    font-weight: 600;
+    color: #28a745;
+    margin-bottom: 12px;
+}
+
+/* Favorite Button */
+.favorite-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.favorite-btn.favorite {
+    color: red;
+}
+
+/* Book Now Button */
+.book-btn {
+    background-color: #45beff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    margin-top: 16px;
+}
+
+.book-btn:hover {
+    background-color: #14437d;
+}
+
+/* Buttons Container */
+.buttons-container {
+    margin-top: 16px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .card {
+    width: calc(50% - 16px); /* 2 cards per row on medium screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    width: 100%; /* 1 card per row on small screens */
+  }
+}
