@@ -9,7 +9,6 @@ import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext"; // Correct named import
 
-
 const { Title } = Typography;
 const { Footer, Content } = Layout;
 
@@ -63,38 +62,43 @@ const LoginPage = () => {
               className="row-col"
             >
               <Form.Item
-                className="username"
+                className="username input-slide-effect"
                 initialValue={username}
                 label="Email"
                 name="email"
                 onChange={(e) => setUsername(e.target.value)}
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your email!",
-                  },
-                ]}
+                rules={[{ required: true, message: "Please input your email!" }]}
               >
-                <Input placeholder="Email" prefix={<MailOutlined />} />
+                <Input
+                  placeholder="Email"
+                  prefix={
+                    <div
+                      className={`input-prefix-wrapper ${username !== "" ? "input-prefix-hidden" : ""}`}
+                    >
+                      <MailOutlined />
+                    </div>
+                  }
+                />
               </Form.Item>
 
               <Form.Item
-                className="password"
+                className="password input-slide-effect"
                 initialValue={password}
                 label="Password"
                 name="password"
-                type={"password"}
+                type="password"
                 onChange={(e) => setPassword(e.target.value)}
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your password!",
-                  },
-                ]}
+                rules={[{ required: true, message: "Please input your password!" }]}
               >
                 <Input.Password
                   placeholder="Password"
-                  prefix={<LockOutlined />}
+                  prefix={
+                    <div
+                      className={`input-prefix-wrapper ${password !== "" ? "input-prefix-hidden" : ""}`}
+                    >
+                      <LockOutlined />
+                    </div>
+                  }
                 />
               </Form.Item>
 
@@ -123,7 +127,7 @@ const LoginPage = () => {
 
               <div style={{ textAlign: "center", marginTop: "10px" }}>
                 <Typography.Text type="secondary">
-                 OR
+                  OR
                 </Typography.Text>
               </div>
 
@@ -156,8 +160,8 @@ const LoginPage = () => {
               </div>
               <div className="margin-top-10 text-center">
                 <Typography.Text type='secondary'>Need an account?</Typography.Text>
-                <Button type="link" onClick={() => navigate('/signup')}>
-                  SIGN UP
+                <Button type="link" onClick={() => navigate('/create')}>
+                  Create Account
                 </Button>
               </div>
             </Form>

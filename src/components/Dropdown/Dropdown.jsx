@@ -9,7 +9,7 @@ function Dropdown() {
   return (
     <>
       <ul
-        className={dropdown ? "services-submenu clicked" : "services-submenu"}
+        className={dropdown ? "services-submenu clicked" : "services-submenu rounded-md bg-custom-cyan"}
         onClick={() => setDropdown(!dropdown)}
       >
         {serviceDropdown.map((item) => {

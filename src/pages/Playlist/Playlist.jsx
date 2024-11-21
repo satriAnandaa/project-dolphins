@@ -13,17 +13,20 @@ import {
   Col,
   Row,
   Modal,
+  Select
 } from "antd";
 import {
   PlusOutlined,
   EditOutlined,
   DeleteOutlined,
+  SearchOutlined,
   VideoCameraOutlined,
 } from "@ant-design/icons";
 import "./Playlist.css";
 import { deleteData, getData, sendData } from "../../utils/api"; // Ensure these utility functions are correctly implemented
 
 const { Title, Text } = Typography;
+
 
 const Playlist = () => {
   const [data, setData] = useState([]);
@@ -36,6 +39,7 @@ const Playlist = () => {
   const [dataSource, setDataSource] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedVideo, setSelectedVideo] = useState(null);
+  const [searchText, setSearchText] = useState([]);
 
   // Fetch data on component mount
   useEffect(() => {
@@ -108,21 +112,21 @@ const Playlist = () => {
 
     const url = isEdit ? `/api/playlist/update/${idSelected}` : "/api/playlist/24";
     sendData(url, formData)
-    .then((resp) => {
+      .then((resp) => {
         if (resp) {
-            showAlert("success", "Data sent successfully", "Data has been saved successfully");
-            form.resetFields();
-            getDataPlaylist(); // Refresh data after submission
-            onCloseDrawer();
+          showAlert("success", "Data sent successfully", "Data has been saved successfully");
+          form.resetFields();
+          getDataPlaylist(); // Refresh data after submission
+          onCloseDrawer();
         } else {
-            showAlert("error", "Submission failed", "Data could not be saved");
+          showAlert("error", "Submission failed", "Data could not be saved");
         }
-    })
-    .catch((err) => {
+      })
+      .catch((err) => {
         console.error(err);
         showAlert("error", "Submission failed", "Data could not be saved");
-    });
-};
+      });
+  };
 
   // Confirm and delete a video
   const confirmDelete = (record_id) => {
@@ -131,29 +135,30 @@ const Playlist = () => {
     const params = new URLSearchParams();
     params.append("id", record_id);
     deleteData(url, params)
-        .then((resp) => {
-            if (resp?.status === 200) {
-                showAlert("success", "Data deleted", "Video deleted successfully");
-                getDataPlaylist(); // Refresh data after deletion
-                form.resetFields();
-                onCloseDrawer();
-            } else {
-                showAlert("error", "Failed", "Failed to delete video");
-            }
-        })
-        .catch((err) => {
-            console.error(err);
-            showAlert("error", "Failed", "Failed to delete video");
-        });
-};
+      .then((resp) => {
+        if (resp?.status === 200) {
+          showAlert("success", "Data deleted", "Video deleted successfully");
+          getDataPlaylist(); // Refresh data after deletion
+          form.resetFields();
+          setIsModalVisible(false);
+          onCloseDrawer();
+        } else {
+          showAlert("error", "Failed", "Failed to delete video");
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        showAlert("error", "Failed", "Failed to delete video");
+      });
+  };
 
   // Show a message alert
-   const showAlert = (type, title, description) => {
-        message[type]({
-            content: description,
-            duration: 3,
-        });
-    };
+  const showAlert = (type, title, description) => {
+    message[type]({
+      content: description,
+      duration: 3,
+    });
+  };
 
   // Handle video card click (open modal)
   const handleCardClick = (item) => {
@@ -170,41 +175,65 @@ const Playlist = () => {
   // Render the drawer component
   const renderDrawer = () => {
     return (
-        <Drawer
-            title={isEdit ? "Edit Video" : "Create Video"}
-            onClose={onCloseDrawer}
-            open={isDrawer}
-            extra={
-                <Button
-                    htmlType="submit"
-                    type="primary"
-                    onClick={handleSubmit}
-                    style={{ backgroundColor: isEdit ? "green" : "blue", color: "white" }}
-                >
-                    Submit
-                </Button>
-            }
-        >
-            <Form form={form} layout="vertical">
-                <Form.Item name="play_name" label="Video Name" required>
-                    <Input />
-                </Form.Item>
-                <Form.Item name="play_url" label="Video URL" required>
-                    <Input />
-                </Form.Item>
-                <Form.Item name="play_thumbnail" label="Thumbnail URL" required>
-                    <Input />
-                </Form.Item>
-                <Form.Item name="play_genre" label="Genre" required>
-                    <Input />
-                </Form.Item>
-                <Form.Item name="play_description" label="Description" required>
-                    <Input.TextArea rows={3} />
-                </Form.Item>
-            </Form>
-        </Drawer>
+      <Drawer
+        title={isEdit ? "Edit Video" : "Create Video"}
+        onClose={onCloseDrawer}
+        open={isDrawer}
+        extra={
+          <Button
+            htmlType="submit"
+            type="primary"
+            onClick={handleSubmit}
+            style={{ backgroundColor: isEdit ? "green" : "blue", color: "white" }}
+          >
+            Submit
+          </Button>
+        }
+      >
+        <Form form={form} layout="vertical">
+          <Form.Item name="play_name" label="Video Name" required>
+            <Input />
+          </Form.Item>
+          <Form.Item name="play_url" label="Video URL" required>
+            <Input />
+          </Form.Item>
+          <Form.Item name="play_thumbnail" label="Thumbnail URL" required>
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name="play_genre"
+            label="Genre"
+            rules={[{ required: true, message: "Please select a genre!" }]}
+          >
+            <Select placeholder="Select a genre">
+              <Select.Option value="music">Music</Select.Option>
+              <Select.Option value="song">Song</Select.Option>
+              <Select.Option value="movie">Movie</Select.Option>
+              <Select.Option value="education">Education</Select.Option>
+              <Select.Option value="others">Others</Select.Option>
+            </Select>
+          </Form.Item>
+
+          <Form.Item name="play_description" label="Description" required>
+            <Input.TextArea rows={3} />
+          </Form.Item>
+        </Form>
+      </Drawer>
     );
-};
+  };
+
+  const handleSearch = (value) => {
+    setSearchText(value.toLowerCase());
+
+
+  };
+
+  let dataSourceFiltered = dataSource.filter((item) => {
+    return (
+      (item?.play_name?.toLocaleLowerCase() || " ").includes(searchText) ||
+      (item?.play_genre?.toLocaleLowerCase() || " ").includes(searchText)
+    );
+  });
 
   // Render the modal component
   const renderModal = () => {
@@ -255,14 +284,22 @@ const Playlist = () => {
   return (
     <div className="page-container-play">
       {/* Header Section */}
-      <div className="header-container">
-        <img src="src/assets/Header.png" alt="Header" className="header-image" />
+      <div className="header-container bg-transparent  ">
+        <img src="src/assets/Header.png" alt="Header" className="header-image w-100" />
       </div>
 
       <Row gutter={[24, 0]}>
         <Col xs={24} className="mb-24">
-          <Card bordered={false} className="circle-box h-full w-full">
+          <Card bordered={false} className="circle-box h-full w-full bg-white shadow-none">
             <Title level={2}>Video Playlist</Title>
+            <Input
+              placeholder="Search here .... "
+              prefix={<SearchOutlined />}
+              className="header-search"
+              allowClear
+              size={"large"}
+              onChange={(e) => handleSearch(e.target.value)}
+            />
             <Button
               type="primary"
               icon={<PlusOutlined />}
@@ -272,9 +309,13 @@ const Playlist = () => {
               Add New Video
             </Button>
             {renderDrawer()}
-            <List
+
+
+            {dataSourceFiltered.length > 0 && loading ?  <Skeleton active /> : <List
+
               grid={{ gutter: 16, column: 4 }}
-              dataSource={dataSource}
+
+              dataSource={dataSourceFiltered ? dataSourceFiltered : []}
               renderItem={(item) => (
                 <List.Item key={item.id}>
                   <Card
@@ -316,7 +357,8 @@ const Playlist = () => {
                   </Card>
                 </List.Item>
               )}
-            />
+
+            /> }
           </Card>
         </Col>
       </Row>

@@ -10,8 +10,20 @@
 	color: white;
   }
 
+
   .ant-layout-footer {
 	background-color: white; /* Set footer background to white */
 	text-align: center; /* Optional: to center the copyright text */
   }
+
+/* Hide prefix icon when there is input in the field */
+.input-prefix-hidden {
+	display: none !important;
+  }
+  
+  .input-slide-effect input:focus + .ant-input-prefix,
+  .input-slide-effect input:not(:placeholder-shown) + .ant-input-prefix {
+	display: none !important; /* Hide the icon when the input has focus or contains text */
+  }
+  
   

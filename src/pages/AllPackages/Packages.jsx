@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Packages.css";
+import { useNavigate } from "react-router-dom";
 
 function AllPackage() {
   const initialTours = [
@@ -17,12 +18,17 @@ function AllPackage() {
 
   const [tours, setTours] = useState(initialTours);
   const [filter, setFilter] = useState("");
+  const navigate = useNavigate();
 
   const toggleFavorite = (id) => {
     setTours(tours.map((tour) => (tour.id === id ? { ...tour, favorite: !tour.favorite } : tour)));
   };
 
   const filteredTours = filter ? tours.filter((tour) => tour.package === filter) : tours;
+
+  const handleBooking = (tour) => {
+    navigate("/booking", { state: { card: tour } }); // Kirim data paket ke BookingPage
+  };
 
   return (
     <div className="layout-container">
@@ -51,7 +57,12 @@ function AllPackage() {
                 >
                   {tour.favorite ? "❤️" : "🤍"}
                 </button>
-                <button className="book-btn">Book Now</button>
+                <button
+                  className="book-btn"
+                  onClick={() => handleBooking(tour)} // Navigasi dengan data spesifik
+                >
+                  Book Now
+                </button>
               </div>
             </div>
           </div>

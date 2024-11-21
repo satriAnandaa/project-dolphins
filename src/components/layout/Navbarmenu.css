@@ -5,6 +5,9 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 2rem;
+  position: sticky;
+  top: 0; 
+  z-index: 1000; 
 }
 
 .navbar-logo {
@@ -41,12 +44,14 @@
   width: auto;
   justify-content: flex-end;
   margin-right: 2rem;
+  
 }
 
 .nav-item {
   display: flex;
   align-items: center;
   height: 10vh;
+  
 }
 
 .nav-item a {
@@ -56,19 +61,19 @@
   margin-right: 2rem;
   padding: 6px 16px;
   border-radius: 5px;
+  
 }
 
 .nav-item a:hover {
   background: rgb(0, 212, 212);
 }
 
-/* Avatar and Profile Dropdown */
 .profile-dropdown {
   position: relative;
   display: flex;
   align-items: center;
   cursor: pointer;
-  margin-left: 1rem;
+  
 }
 
 .profile-avatar {
@@ -76,59 +81,62 @@
   height: 40px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid white;
-  transition: transform 0.2s ease;
-}
-
-.profile-avatar:hover {
-  transform: scale(1.1);
 }
 
 .dropdown-menu {
-  display: none;
   position: absolute;
-  top: 50px;
+  top: 50px; /* Adjust this value based on your layout */
   right: 0;
-  background: white;
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+  background:  rgb(0, 212, 212);
+  box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   padding: 10px 0;
-  z-index: 100;
-  min-width: 160px;
-  opacity: 0; /* Start with hidden and transparent */
-  visibility: hidden; /* Hide initially */
-  transition: opacity 0.3s ease, visibility 0s 0.3s; /* Smooth opacity transition */
+  z-index: 9999; /* Ensure it is above other content */
+  display: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: opacity 0.3s, transform 0.3s, visibility 0s 0.3s;
+}
+
+.profile-dropdown:hover .dropdown-menu,
+.profile-dropdown.active .dropdown-menu {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: opacity 0.3s, transform 0.3s;
 }
 
 .dropdown-menu ul {
   list-style: none;
-  padding: 0;
   margin: 0;
+  padding: 0;
 }
 
 .dropdown-menu li {
   padding: 10px 20px;
   cursor: pointer;
-  color: #333;
-  transition: background 0.2s ease;
+  color: white;
+  transition: background-color 0.2s;
 }
 
 .dropdown-menu li:hover {
-  background: #f0f0f0;
+  background-color: rgb(0, 175, 175);
 }
 
-/* Hover effect for profile avatar to display dropdown */
 .profile-dropdown:hover .dropdown-menu {
-  display: block;
-  opacity: 1; /* Fade in */
-  visibility: visible; /* Make visible after fade-in */
-  transition: opacity 0.3s ease, visibility 0s 0s; /* Smooth fade-in */
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-/* Add spacing to dropdown items */
+/* Add spacing between dropdown items */
 .dropdown-menu li + li {
   border-top: 1px solid #f0f0f0;
 }
+
 
 /* Responsive styling */
 @media (max-width: 768px) {
@@ -156,3 +164,4 @@
     margin-top: 10px;
   }
 }
+

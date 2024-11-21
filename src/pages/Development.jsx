@@ -3,7 +3,7 @@ import React from "react";
 function Development() {
   return (
     <div>
-      <h1 className="development">Development</h1>
+      <h1 className="development">Blank Page</h1>
     </div>
   );
 }

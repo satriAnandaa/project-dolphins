@@ -1,177 +1,155 @@
-import { Layout, Button, Row, Col, Typography, Form, Input } from "antd";
-import { MailOutlined, LockOutlined } from "@ant-design/icons";
+import {
+  Layout,
+  Button,
+  Row,
+  Col,
+  Typography,
+  Form,
+  Input,
+} from "antd";
+import { UserOutlined, MailOutlined, PhoneOutlined, LockOutlined } from "@ant-design/icons";
 import SignBG from "../../assets/WADOL.jpg";
 import Google from "../../assets/Google.jpeg";
-import Instagram from "../../assets/Instagram.jpeg";
-
-import "./CreateAccount.css";
-import { useState, useContext } from "react";
+import Instagram from "../../assets/instagram.jpeg";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../context/AuthContext"; // Correct named import
 
+import "./CreateAccount.css"; // Importing the CSS file
 
 const { Title } = Typography;
-const { Footer, Content } = Layout;
+const { Content } = Layout;
 
-const CreateAccount= () => {
+const CreateAcoount = () => {
   const navigate = useNavigate();
-  const { login } = useContext(AuthContext); // Ambil fungsi login dari AuthContext
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
 
-  const handleLogin = async () => {
+  const handleSignup = async () => {
     console.log(username, password);
-
-    // Simulasikan login berhasil
-    const userData = { email: username }; // Data user simulasi (dapat diganti dengan hasil API login)
-    login(userData); // Panggil fungsi login dari AuthContext dengan data user
-
-    navigate("/", { replace: true });
+    navigate("/login", { replace: true });
   };
 
   return (
     <Layout className="layout-default layout-signin">
       <Content className="signin login-container">
         <Row gutter={[10, 0]} justify="center">
-          <Col
-            xs={{ span: 24 }}
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <img
-              src={SignBG}
-              alt=""
-              className="sign-img"
-              style={{ width: "300px", height: "auto" }}
-            />
+          <Col xs={{ span: 24 }} className="col-center">
+            <img src={SignBG} alt="" className="sign-img" />
           </Col>
 
           <Col xs={{ span: 24 }} lg={{ span: 8 }} md={{ span: 12 }}>
-            <Title
-              className="font-regular text-muted"
-              level={5}
-              style={{ textAlign: "center" }}
-            >
-              Welcome to Watching Dolphins
+            <Title className="mb-15 text-center">Sign Up</Title>
+            <Title className="font-regular text-muted text-center" level={5}>
+              Create a free account
             </Title>
-            <Form
-              onFinish={() => handleLogin()}
-              layout="vertical"
-              className="row-col"
-            >
+            <Form onFinish={handleSignup} layout="vertical" className="row-col">
               <Form.Item
-                className="username"
-                initialValue={username}
-                label="Email"
-                name="email"
-                onChange={(e) => setUsername(e.target.value)}
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your email!",
-                  },
-                ]}
+                label="Name"
+                name="name"
+                onChange={(e) => setName(e.target.value)}
+                rules={[{ required: true, message: "Please input your name!" }]}
               >
-                <Input placeholder="Email" prefix={<MailOutlined />} />
-              </Form.Item>
-
-              <Form.Item
-                className="password"
-                initialValue={password}
-                label="Password"
-                name="password"
-                type={"password"}
-                onChange={(e) => setPassword(e.target.value)}
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your password!",
-                  },
-                ]}
-              >
-                <Input.Password
-                  placeholder="Password"
-                  prefix={<LockOutlined />}
+                <Input
+                  placeholder="Name"
+                  prefix={
+                    <div
+                      className={`input-prefix-wrapper ${name !== "" ? "input-prefix-hidden" : ""}`}
+                    >
+                      <UserOutlined />
+                    </div>
+                  }
                 />
               </Form.Item>
 
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  marginTop: "-10px",
-                }}
+              <Form.Item
+                label="Phone"
+                name="phone"
+                onChange={(e) => setPhone(e.target.value)}
+                rules={[{ required: true, message: "Please input your phone!" }]}
               >
-                <Button type="link" style={{ paddingLeft: 0 }}>
-                  Forgot Password?
-                </Button>
-              </div>
+                <Input
+                  placeholder="Phone"
+                  prefix={
+                    <div
+                      className={`input-prefix-wrapper ${phone !== "" ? "input-prefix-hidden" : ""}`}
+                    >
+                      <PhoneOutlined />
+                    </div>
+                  }
+                />
+              </Form.Item>
+
+              <Form.Item
+                label="Email"
+                name="email"
+                onChange={(e) => setUsername(e.target.value)}
+                rules={[{ required: true, message: "Please input your email!" }]}
+              >
+                <Input
+                  placeholder="Email"
+                  prefix={
+                    <div
+                      className={`input-prefix-wrapper ${username !== "" ? "input-prefix-hidden" : ""}`}
+                    >
+                      <MailOutlined />
+                    </div>
+                  }
+                />
+              </Form.Item>
+
+              <Form.Item
+                label="Password"
+                name="password"
+                type="password"
+                onChange={(e) => setPassword(e.target.value)}
+                rules={[{ required: true, message: "Please input your password!" }]}
+              >
+                <Input.Password
+                  placeholder="Password"
+                  prefix={
+                    <div
+                      className={`input-prefix-wrapper ${password !== "" ? "input-prefix-hidden" : ""}`}
+                    >
+                      <LockOutlined />
+                    </div>
+                  }
+                />
+              </Form.Item>
 
               <Form.Item>
                 <Button
                   type="primary"
                   htmlType="submit"
-                  style={{ width: "100%" }}
-                  disabled={username === "" || password === ""}
+                  className="full-width-btn"
+                  disabled={username === "" || password === "" || name === "" || phone === ""}
                 >
-                  LOGIN
+                  SIGN UP
                 </Button>
               </Form.Item>
 
-              <div style={{ textAlign: "center", marginTop: "10px" }}>
-                <Typography.Text type="secondary">
-                 OR
-                </Typography.Text>
+              <div className="centered-text">
+                <Typography.Text type="secondary">OR</Typography.Text>
               </div>
 
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  gap: "10px",
-                  marginTop: "10px",
-                }}
-              >
-                <img
-                  src={Google}
-                  alt="Google Sign In"
-                  style={{
-                    width: "40px",
-                    height: "40px",
-                    borderRadius: "50%",
-                  }}
-                />
-                <img
-                  src={Instagram}
-                  alt="Instagram Sign In"
-                  style={{
-                    width: "40px",
-                    height: "40px",
-                    borderRadius: "50%",
-                  }}
-                />
+              <div className="social-icons">
+                <img src={Google} alt="Google" className="social-icon" />
+                <img src={Instagram} alt="Instagram" className="social-icon" />
               </div>
+
               <div className="margin-top-10 text-center">
-                <Typography.Text type='secondary'>Need an account?</Typography.Text>
-                <Button type="link" onClick={() => navigate('/signup')}>
-                  SIGN UP
+                <Typography.Text type="secondary">Already have an account?</Typography.Text>
+                <Button type="link" onClick={() => navigate("/login")}>
+                  SIGN IN
                 </Button>
               </div>
             </Form>
           </Col>
         </Row>
       </Content>
-      <Footer>
-        <p className="copyright">
-          {" "}
-          Copyright © 2024 Joy Team - Powered by Universitas Pendidikan Ganesha
-        </p>
-      </Footer>
     </Layout>
   );
 };
 
-export default CreateAccount;
+export default CreateAcoount;

@@ -4,8 +4,8 @@ import "./Button.css";
 
 function Button() {
   return (
-    <Link to="create">
-      <button className="btn">Create Account</button>
+    <Link to="login">
+      <button className="btn">Login</button>
     </Link>
   );
 }

@@ -1,38 +1,116 @@
 /* General Layout */
 .page-container {
-    padding: 24px;
-    background-color: #e2e8f0;
     margin-left: 0;
     width: 100%;
+    background: linear-gradient(178.6deg, rgb(232, 245, 253) 3.3%, rgb(252, 253, 255) 109.6%);
+    font-family: 'Montserrat', sans-serif;
 }
 
-/* Header Styles */
-.header-home {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    padding: 16px;
-    margin-bottom: 20px;
+/* Landing Page Styles */
+.hero {
+  position: relative;
+  overflow: hidden;
 }
 
-.header-home-image {
-    width: 100%;
-    height: 400px; /* Increased height to make it taller */
-    object-fit: cover;
-    border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+.carousel-item {
+  position: relative;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
 }
+
+.carousel-item h1 {
+  font-size: 4em;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.carousel-item p {
+  font-size: 1.4em;
+}
+
+/* About Section */
+.about {
+  padding: 50px 15px;
+  text-align: center;
+}
+
+.about h2 {
+  font-size: 2.5em;
+  font-weight: bold;
+  color: #1a2a3a; 
+  margin-bottom: 20px;
+  margin-left: 100px;
+}
+
+.about p {
+  font-size: 1.2em;
+  max-width: 1300px;
+  margin: 0 auto;
+  line-height: 1.8;
+  margin-left: 100px;
+  
+}
+
+.why-us {
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+}
+
+.why-us h2 {
+  font-size: 36px;
+  margin-bottom: 35px;
+}
+
+.why-us-grid {
+  display: flex;
+  justify-content: center;
+  gap: 200px;
+  flex-wrap: wrap;
+}
+
+.why-us-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 200px;
+}
+
+.icon-box {
+  background-color: #152a48;
+  color: white;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.text-box h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.text-box p {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #666;
+}
+
 
 /* Special Offers Section */
 .special-offers-container {
     text-align: center;
     margin-top: 40px;
     margin-bottom: 20px;
-    padding: 0 20px; /* Added padding to make it more spacious */
+    padding: 0 20px; 
 }
 
 .special-offers-title {
-    font-size: 36px; /* Increased font size */
+    font-size: 36px;
     font-weight: bold;
     color: #333;
     margin-bottom: 12px; /* Added more space under title */
@@ -53,6 +131,7 @@
   justify-content: space-between;
   gap: 16px;
   margin-top: 24px;
+  padding: 24px 40px;
 }
 
 .card {
@@ -80,6 +159,7 @@
 .card-content {
     padding: 16px;
     position: relative;
+    
 }
 
 .rating {
@@ -159,4 +239,57 @@
   .card {
     width: 100%; /* 1 card per row on small screens */
   }
+}
+
+/* Contact Section */
+.contact {
+  padding: 80px 20px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.contact h2 {
+  font-size: 2.5em;
+  color: #1a2a3a;
+  margin-bottom: 30px;
+  
+}
+
+.contact-form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form label {
+  display: block;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid #1a2a3a;
+  border-radius: 8px;
+  font-size: 1.2em;
+}
+
+.contact-form .btn {
+  background-color: #f0a500;
+  color: white;
+  padding: 15px 30px;
+  border-radius: 50px;
+  font-size: 1.2em;
+  width: 100%;
+  transition: background-color 0.3s ease;
+}
+
+.contact-form .btn:hover {
+  background-color: #e08300;
+  color: white;
 }

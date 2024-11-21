@@ -23,7 +23,7 @@ function Navbarmenu() {
         </Link>
 
         {/* Menu Items */}
-        <ul className="nav-items">
+        <ul className="nav-item">
           {navItems.map((item) => {
             if (item.title === "Pages") {
               return (
@@ -50,7 +50,7 @@ function Navbarmenu() {
         {isLoggedIn ? (
           // Jika login, tampilkan avatar dan menu dropdown
           <div
-            className="profile-dropdown"
+            className="profile-dropdown h-20 w-20 flex justify-center items-center"
             onMouseEnter={() => {
               setIsHovered(true);
               setProfileDropdown(true);
@@ -65,18 +65,18 @@ function Navbarmenu() {
             }}
           >
             <img
-              src="https://via.placeholder.com/40" // Ganti dengan URL gambar avatar
+              src="/src/assets/wipa.JPG" // Ganti dengan URL gambar avatar
               alt="User Avatar"
               className="profile-avatar"
             />
             {profileDropdown && (
-              <div className="dropdown-menu">
+              <div className="dropdown-menu m-3">
                 <ul>
                   <li>
                     <Link to="/profile">My Profile</Link>
                   </li>
                   <li>
-                    <Link to="/appointments">My History</Link>
+                    <Link to="/history">My History</Link>
                   </li>
                   <li onClick={logout}>Logout</li>
                 </ul>

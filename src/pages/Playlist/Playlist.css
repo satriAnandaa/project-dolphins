@@ -1,6 +1,6 @@
 .page-container-play {
     padding: 24px;
-    background-color: #e2e8f0;
+    background: linear-gradient(178.6deg, rgb(232, 245, 253) 3.3%, rgb(252, 253, 255) 109.6%);
     margin-left: 0;
     width: 100%;
   }
@@ -10,14 +10,18 @@
     display: flex;
     justify-content: center;
     margin-bottom: 24px; /* Space below the header */
+    
   }
   
   .header-image {
-    width: 100%; /* Makes the image responsive */
-    height: 400px; /* Adjust height to make the header longer */
-    object-fit: cover; /* Ensures the image fills the height without distortion */
-    border-radius: 8px; /* Optional rounded corners */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for a premium look */
+    width: 120%; 
+    height: 400px; 
+    object-fit: cover; 
+    border-radius: 8px; 
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  .header-search{
+    margin-bottom: 24px;
   }
   
   .ant-list-item {
