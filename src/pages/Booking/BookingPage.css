@@ -1,0 +1,118 @@
+.booking-page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.info-section,
+.booking-section {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+}
+
+.card-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  max-height: 300px;
+  object-fit: cover;
+}
+
+.details h2 {
+  margin: 16px 0;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.details p {
+  color: #555;
+}
+
+.booking-section h3 {
+  margin-bottom: 16px;
+  font-size: 1.25rem;
+  color: #007bff;
+}
+
+.date-picker,
+.people-selection,
+.package-selection {
+  margin-bottom: 20px;
+}
+
+.people-selection h4,
+.package-selection h4 {
+  margin-bottom: 8px;
+  font-size: 1rem;
+  color: #333;
+}
+
+.book-btn {
+  padding: 12px;
+  width: 100%;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.book-btn:hover {
+  background-color: #0056b3;
+}
+
+.book-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+@media (min-width: 768px) {
+  .booking-page {
+    flex-direction: row;
+  }
+
+  .info-section,
+  .booking-section {
+    flex: 1;
+  }
+
+  .details h2 {
+    font-size: 1.75rem;
+  }
+
+  .details p {
+    font-size: 1rem;
+  }
+
+  .booking-section h3 {
+    font-size: 1.5rem;
+  }
+
+  .people-selection h4,
+  .package-selection h4 {
+    font-size: 1.1rem;
+  }
+
+  .book-btn {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .info-section {
+    flex: 1.2;
+  }
+
+  .booking-section {
+    flex: 2;
+  }
+}
+
+

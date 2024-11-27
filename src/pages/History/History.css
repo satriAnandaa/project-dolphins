@@ -1,0 +1,113 @@
+
+.table-wrapper {
+  position: relative;
+  padding: 20px;
+  overflow: hidden; 
+}
+
+.ant-table {
+  position: relative;
+  z-index: 2; 
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e0e0e0;
+}
+
+.ant-table::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1; 
+  background-image: url('/src/assets/dolphin1.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(10px);
+  opacity: 20 !important;
+  pointer-events: none; 
+}
+
+.ant-table-thead > tr > th {
+  background-color: #45beff !important;
+  font-weight: bold;
+  color: #595959;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 3;
+}
+
+.ant-table-tbody > tr > td {
+  color: #333333; 
+  background-color: rgba(255, 255, 255, 0.8); 
+  padding: 12px;
+  font-size: 14px; 
+  position: relative;
+  z-index: 2; 
+}
+
+.ant-table-tbody > tr:hover > td {
+  background-color: rgba(70, 190, 255, 0.2); 
+}
+
+.ant-modal {
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+}
+
+.ant-modal-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #000000;
+  text-align: center;
+}
+
+.ant-modal-header {
+  background-color: #f0f2f5;
+  border-radius: 15px 15px 0 0;
+  padding: 20px;
+  border-bottom: 2px solid #e8e8e8;
+}
+
+.ant-descriptions-item-label {
+  font-size: 16px;
+  font-weight: 600;
+  background-color: #45beff !important;
+}
+
+.ant-descriptions-item-content {
+  font-size: 16px;
+  background-color: #d7eef7 !important;
+}
+
+.history-container {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.history-left,
+.history-right {
+  flex: 1;
+  min-width: 0; /* Prevent table from overflowing */
+}
+
+.history-left {
+  margin-right: 10px;
+}
+
+.history-right {
+  margin-left: 10px;
+}
+
+
+
+
+
+
+
+
