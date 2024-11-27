@@ -13,7 +13,8 @@ import {
   Col,
   Row,
   Modal,
-  Select
+  Select,
+  FloatButton
 } from "antd";
 import {
   PlusOutlined,
@@ -23,7 +24,7 @@ import {
   VideoCameraOutlined,
 } from "@ant-design/icons";
 import "./Playlist.css";
-import { deleteData, getData, sendData } from "../../utils/api"; // Ensure these utility functions are correctly implemented
+import { deleteData, getData, sendData } from "../../utils/api"; 
 
 const { Title, Text } = Typography;
 
@@ -41,12 +42,12 @@ const Playlist = () => {
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [searchText, setSearchText] = useState([]);
 
-  // Fetch data on component mount
+  
   useEffect(() => {
     getDataPlaylist();
   }, []);
 
-  // Fetch playlist data from the API
+  
   const getDataPlaylist = () => {
     setLoading(true);
     getData("/api/playlist/24")
@@ -54,8 +55,8 @@ const Playlist = () => {
         setLoading(false);
         console.log("API Response:", resp);
         if (resp && Array.isArray(resp.datas)) {
-          setDataSource(resp.datas); // Set the data
-          setData(resp.datas); // Update the data state
+          setDataSource(resp.datas); 
+          setData(resp.datas); 
         } else {
           setError("Invalid response format");
         }
@@ -67,12 +68,12 @@ const Playlist = () => {
       });
   };
 
-  // Open the drawer for adding/editing a video
+  
   const handleDrawer = () => {
     setIsDrawer(true);
   };
 
-  // Close the drawer
+ 
   const onCloseDrawer = () => {
     if (isEdit) {
       setIsEdit(false);
@@ -81,7 +82,6 @@ const Playlist = () => {
     setIsDrawer(false);
   };
 
-  // Edit an existing video
   const handleDrawerEdit = (record) => {
     setIsDrawer(true);
     setIsEdit(true);
@@ -95,7 +95,7 @@ const Playlist = () => {
     });
   };
 
-  // Handle form submission
+  
   const handleSubmit = () => {
     const playName = form.getFieldValue("play_name");
     const playUrl = form.getFieldValue("play_url");
@@ -108,7 +108,7 @@ const Playlist = () => {
     formData.append("play_url", playUrl);
     formData.append("play_thumbnail", playThumbnail);
     formData.append("play_genre", playGenre);
-    formData.append("play_description", playDescription); // Debug the form data
+    formData.append("play_description", playDescription); 
 
     const url = isEdit ? `/api/playlist/update/${idSelected}` : "/api/playlist/24";
     sendData(url, formData)
@@ -116,7 +116,7 @@ const Playlist = () => {
         if (resp) {
           showAlert("success", "Data sent successfully", "Data has been saved successfully");
           form.resetFields();
-          getDataPlaylist(); // Refresh data after submission
+          getDataPlaylist(); 
           onCloseDrawer();
         } else {
           showAlert("error", "Submission failed", "Data could not be saved");
@@ -128,7 +128,7 @@ const Playlist = () => {
       });
   };
 
-  // Confirm and delete a video
+  
   const confirmDelete = (record_id) => {
     showAlert("success", "Data deleted", `Successfully deleted video ${record_id}`);
     const url = `/api/playlist/${record_id}`;
@@ -138,7 +138,7 @@ const Playlist = () => {
       .then((resp) => {
         if (resp?.status === 200) {
           showAlert("success", "Data deleted", "Video deleted successfully");
-          getDataPlaylist(); // Refresh data after deletion
+          getDataPlaylist(); 
           form.resetFields();
           setIsModalVisible(false);
           onCloseDrawer();
@@ -152,7 +152,7 @@ const Playlist = () => {
       });
   };
 
-  // Show a message alert
+  
   const showAlert = (type, title, description) => {
     message[type]({
       content: description,
@@ -160,19 +160,19 @@ const Playlist = () => {
     });
   };
 
-  // Handle video card click (open modal)
+  
   const handleCardClick = (item) => {
     setSelectedVideo(item);
     setIsModalVisible(true);
   };
 
-  // Close the modal
+  
   const handleCloseModal = () => {
     setIsModalVisible(false);
     setSelectedVideo(null);
   };
 
-  // Render the drawer component
+  
   const renderDrawer = () => {
     return (
       <Drawer
@@ -235,7 +235,7 @@ const Playlist = () => {
     );
   });
 
-  // Render the modal component
+  
   const renderModal = () => {
     if (!selectedVideo) return null;
 
@@ -277,7 +277,7 @@ const Playlist = () => {
     );
   };
 
-  // Loading and error handling
+ 
   if (loading) return <Skeleton active />;
   if (error) return <div>Error: {error}</div>;
 
@@ -326,7 +326,7 @@ const Playlist = () => {
                         type="link"
                         icon={<EditOutlined />}
                         onClick={(e) => {
-                          e.stopPropagation(); // Prevent opening modal
+                          e.stopPropagation(); 
                           handleDrawerEdit(item);
                         }}
                       >
@@ -342,13 +342,13 @@ const Playlist = () => {
                           type="link"
                           icon={<DeleteOutlined />}
                           danger
-                          onClick={(e) => e.stopPropagation()} // Prevent opening modal
+                          onClick={(e) => e.stopPropagation()} 
                         >
                           Delete
                         </Button>
                       </Popconfirm>,
                     ]}
-                    onClick={() => handleCardClick(item)} // Click to open modal
+                    onClick={() => handleCardClick(item)} 
                   >
                     <Card.Meta
                       title={<><VideoCameraOutlined /> {item.play_name}</>}

@@ -16,6 +16,7 @@ import Profile from './pages/Profil';
 import AboutUs from './pages/AboutUs/AboutuS';
 import BookingPage from './pages/Booking/BookingPage';
 import BookingHistory from './pages/History/BookingHistory';
+import { Footer } from 'antd/es/layout/layout';
 
 
 
@@ -44,6 +45,7 @@ const App = () => {
           <Route path="/booking" element={<BookingPage />} />
           <Route path="/history" element={<BookingHistory />} />
         </Routes>
+
       </BrowserRouter>
     </div>
   );

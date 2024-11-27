@@ -27,12 +27,12 @@ function AllPackage() {
   const filteredTours = filter ? tours.filter((tour) => tour.package === filter) : tours;
 
   const handleBooking = (tour) => {
-    navigate("/booking", { state: { card: tour } }); // Kirim data paket ke BookingPage
+    navigate("/booking", { state: { card: tour } }); 
   };
 
   return (
     <div className="layout-container">
-      {/* Sidebar */}
+     
       <div className="sidebar">
         <h3>Browse Through the Tour Packages</h3>
         <button onClick={() => setFilter("")}>All Packages</button>
@@ -40,7 +40,7 @@ function AllPackage() {
         <button onClick={() => setFilter("Watch and Snorkling")}>Watch and Snorkling</button>
       </div>
 
-      {/* Cards Container */}
+     
       <div className="cards-container-packages">
         {filteredTours.map((tour) => (
           <div key={tour.id} className="card">
@@ -59,7 +59,7 @@ function AllPackage() {
                 </button>
                 <button
                   className="book-btn"
-                  onClick={() => handleBooking(tour)} // Navigasi dengan data spesifik
+                  onClick={() => handleBooking(tour)} 
                 >
                   Book Now
                 </button>

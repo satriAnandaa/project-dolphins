@@ -134,8 +134,16 @@ const CreateAcoount = () => {
               </div>
 
               <div className="social-icons">
-                <img src={Google} alt="Google" className="social-icon" />
-                <img src={Instagram} alt="Instagram" className="social-icon" />
+                <img src={Google} alt="Google" style={{
+                    width: "40px",
+                    height: "40px",
+                    borderRadius: "50%",
+                  }} />
+                <img src={Instagram} alt="Instagram" style={{
+                    width: "40px",
+                    height: "40px",
+                    borderRadius: "50%",
+                  }} />
               </div>
 
               <div className="margin-top-10 text-center">

@@ -98,30 +98,30 @@
     animation-delay: 0.3s;
 }
 
-/* Hover Effect */
+
 .card:hover {
     transform: scale(1.05);
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
 }
 
-/* Responsive Adjustments */
+
 @media (max-width: 1024px) {
     .card {
-        flex: 1 1 calc(33.33% - 16px); /* 3 kartu per baris pada layar medium */
+        flex: 1 1 calc(33.33% - 16px); 
         max-width: calc(33.33% - 16px);
     }
 }
 
 @media (max-width: 768px) {
     .card {
-        flex: 1 1 calc(50% - 16px); /* 2 kartu per baris pada layar kecil */
+        flex: 1 1 calc(50% - 16px); 
         max-width: calc(50% - 16px);
     }
 }
 
 @media (max-width: 480px) {
     .card {
-        flex: 1 1 100%; /* 1 kartu per baris pada layar sangat kecil */
+        flex: 1 1 100%; 
         max-width: 100%;
     }
 }

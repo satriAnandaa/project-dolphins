@@ -34,19 +34,19 @@ export const navItems = [
     },
     {
       id: 2,
-      title: "Consulting",
+      title: "Blank Page",
       path: "./consulting",
       cName: "submenu-item",
     },
     {
       id: 3,
-      title: "Design",
+      title: "Blank Page",
       path: "./design",
       cName: "submenu-item",
     },
     {
       id: 4,
-      title: "Development",
+      title: "Blank Page",
       path: "./development",
       cName: "submenu-item",
     },

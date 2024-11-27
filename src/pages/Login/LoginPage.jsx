@@ -168,12 +168,12 @@ const LoginPage = () => {
           </Col>
         </Row>
       </Content>
-      <Footer>
+      {/* <Footer>
         <p className="copyright">
           {" "}
           Copyright © 2024 Joy Team - Powered by Universitas Pendidikan Ganesha
         </p>
-      </Footer>
+      </Footer> */}
     </Layout>
   );
 };
