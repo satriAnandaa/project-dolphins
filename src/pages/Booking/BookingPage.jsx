@@ -5,6 +5,7 @@ import { useLocation } from "react-router-dom";
 import { FloatButton, Tooltip, Radio, InputNumber, Divider, DatePicker, notification } from "antd";
 import { WhatsAppOutlined } from "@ant-design/icons";
 
+
 const BookingPage = () => {
   const location = useLocation();
   const selectedCard = location.state?.card || {};
@@ -14,19 +15,21 @@ const BookingPage = () => {
   const [selectedDate, setSelectedDate] = useState(today);
   const [selectedPackage, setSelectedPackage] = useState("watch-dolphin");
   const [numPeople, setNumPeople] = useState(1);
-
- 
-  const generateDates = () => {
-    const dates = [];
-    for (let i = 0; i < 7; i++) {
-      dates.push(moment(today).add(i, "days"));
-    }
-    return dates;
-  };
-
+  
+  
+  
   
   const handlePeopleChange = (value) => {
-    setNumPeople(value || 1); 
+    if (value > maxSeatsAvailable) {
+      notification.warning({
+        message: "Limit Exceeded",
+        description: `Only ${maxSeatsAvailable} seats are available for this package.`,
+        placement: "topRight",
+      });
+      setNumPeople(maxSeatsAvailable);
+    } else {
+      setNumPeople(value || 1);
+    }
   };
 
   
@@ -35,11 +38,7 @@ const BookingPage = () => {
   };
 
   
-  const handleDateClick = (date) => {
-    setSelectedDate(date);
-  };
 
-  
   const handleDateChange = (date) => {
     setSelectedDate(date || today); 
   };
@@ -66,6 +65,10 @@ const BookingPage = () => {
       duration: 4,
     });
   };
+
+  const maxSeatsAvailable = selectedCard.capacity
+  ? selectedCard.capacity - selectedCard.bookedSeats
+  : 0;
   
 
   return (
@@ -121,6 +124,7 @@ const BookingPage = () => {
         {/* Book Button */}
         <button
           className="book-btn"
+          disabled={maxSeatsAvailable <= 0}
           onClick={() =>
             openNotification(
               `Appointment booked on ${selectedDate.format(
@@ -129,7 +133,7 @@ const BookingPage = () => {
             )
           }
         >
-          Booking 
+           {maxSeatsAvailable > 0 ? "Book Now" : "Fully Booked"} 
         </button>
       </div>
       <Tooltip title="Chat on WhatsApp" placement="left">

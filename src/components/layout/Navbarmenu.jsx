@@ -46,7 +46,7 @@ function Navbarmenu() {
           })}
         </ul>
 
-        {/* Tampilkan Avatar atau Tombol Create Account */}
+      
         {isLoggedIn ? (
           // Jika login, tampilkan avatar dan menu dropdown
           <div

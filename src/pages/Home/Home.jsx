@@ -1,12 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { SmileOutlined, SafetyCertificateOutlined, StarOutlined } from '@ant-design/icons';
 import { Card } from 'antd';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Carousel from 'react-bootstrap/Carousel';
 import 'aos/dist/aos.css';
 import AOS from 'aos';
-import { useEffect } from 'react';
-import "./Home.css";
 import { useNavigate } from "react-router-dom";
 
 function Home() {
@@ -78,184 +76,138 @@ function Home() {
   const navigate = useNavigate();
 
   const handleBooking = (tour) => {
-    navigate("/booking", { state: { card: tour } }); 
+    navigate("/booking", { state: { card: tour } });
   };
-
 
   useEffect(() => {
     AOS.init({
-      duration: 800, // Durasi animasi dalam milidetik
-      offset: 120, // Jarak elemen dari viewport sebelum animasi dimulai
-      once: true, // Animasi hanya berjalan sekali
+      duration: 800,
+      offset: 120,
+      once: true,
     });
   }, []);
 
   return (
-    <div className="page-container">
-      <div className="landing-page">
-        <div className="hero">
-          <Carousel interval={700}>
-            <Carousel.Item>
-              <div
-                className="carousel-item"
-                style={{
-                  backgroundImage: "url('src/assets/act2.jpg')",
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  height: '80vh',
-                  color: 'white',
-                  textAlign: 'center',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                  alignItems: 'center',
+    <div className="w-full bg-gradient-to-b from-blue-100 to-white font-montserrat">
+      <div className="relative">
+        <Carousel interval={700}>
+          <Carousel.Item>
+            <div
+              className="bg-cover bg-center h-[80vh] text-white text-center flex flex-col justify-center items-center"
+              style={{ backgroundImage: "url('src/assets/act2.jpg')" }}
+            >
+              <h1 className="text-6xl font-bold mb-5">Discover the Beauty of Dolphin Watching</h1>
+              <p className="text-lg">Join our tour for a once-in-a-lifetime experience of watching dolphins in their natural habitat.</p>
+            </div>
+          </Carousel.Item>
+          <Carousel.Item>
+            <div
+              className="bg-cover bg-center h-[80vh] text-white text-center flex flex-col justify-center items-center"
+              style={{ backgroundImage: "url('src/assets/act3.jpg')" }}
+            >
+              <h1 className="text-6xl font-bold mb-5">Experience Lovina Like Never Before</h1>
+              <p className="text-lg">Relax and enjoy the serene beauty of Lovina Beach.</p>
+            </div>
+          </Carousel.Item>
+          <Carousel.Item>
+            <div
+              className="bg-cover bg-center h-[80vh] text-white text-center flex flex-col justify-center items-center"
+              style={{ backgroundImage: "url('src/assets/lumba.jpg')" }}
+            >
+              <h1 className="text-6xl font-bold mb-5">Unforgettable Sunrise Views</h1>
+              <p className="text-lg">Marvel at the breathtaking sunset as you sail.</p>
+            </div>
+          </Carousel.Item>
+        </Carousel>
+      </div>
 
-                }}
-              >
-                <h1>Discover the Beauty of Dolphin Watching</h1>
-                <p>Join our tour for a once-in-a-lifetime experience of watching dolphins in their natural habitat.</p>
-              </div>
-            </Carousel.Item>
-
-            <Carousel.Item>
-              <div
-                className="carousel-item"
-                style={{
-                  backgroundImage: "url('src/assets/act3.jpg')",
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  height: '80vh',
-                  color: 'white',
-                  textAlign: 'center',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-              >
-                <h1>Experience Lovina Like Never Before</h1>
-                <p>Relax and enjoy the serene beauty of Lovina Beach.</p>
-              </div>
-            </Carousel.Item>
-
-            <Carousel.Item>
-              <div
-                className="carousel-item"
-                style={{
-                  backgroundImage: "url('src/assets/lumba.jpg')",
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  height: '80vh',
-                  color: 'white',
-                  textAlign: 'center',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-              >
-                <h1>Unforgettable Sunrise Views</h1>
-                <p>Marvel at the breathtaking sunset as you sail.</p>
-              </div>
-            </Carousel.Item>
-          </Carousel>
+      <div id="about" className="flex flex-col md:flex-row items-center gap-8 p-8 md:px-20">
+        <div className="flex-1 text-left">
+          <h2 className="text-2xl font-bold text-gray-900">"Explore the Wonders of Lovina: Unforgettable Dolphin Encounters and Vibrant Snorkeling Adventures!"</h2>
+          <p className="mt-4 text-lg leading-8">Welcome to our website! We specialize in offering unforgettable tours to experience the beauty of Lovina's pristine waters. Our services include dolphin watching, where you can marvel at these magnificent creatures in their natural habitat, and snorkeling adventures, allowing you to explore vibrant coral reefs and underwater wonders.</p>
         </div>
-
-        <div id="about" className="about" data-aos="slide-up" style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-          <div style={{ flex: 1, textAlign: 'left' }}>
-            <h2>"Explore the Wonders of Lovina: Unforgettable Dolphin Encounters and Vibrant Snorkeling Adventures!"</h2>
-            <p>Welcome to our website! We specialize in offering unforgettable tours to experience the beauty of Lovina's pristine waters. Our services include dolphin watching, where you can marvel at these magnificent creatures in their natural habitat, and snorkeling adventures, allowing you to explore vibrant coral reefs and underwater wonders.</p>
-          </div>
-          <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
-            <img src="/src/assets/maskot.png" alt="Mascot" style={{ maxWidth: '70%', height: 'auto', marginLeft: '150px' }} />
-          </div>
+        <div className="flex-1 flex justify-center">
+          <img src="/src/assets/maskot.png" alt="Mascot" className="w-3/4 md:w-2/3" />
         </div>
+      </div>
 
-        <div id="why-us" className="why-us" data-aos="slide-up">
-  <h2>Why Choose Us</h2>
-  <div className="why-us-grid">
-    <div className="why-us-item">
-      <div className="icon-box">
+      <div id="why-us" className="text-center p-8">
+  <h2 className="text-3xl font-bold mb-8">Why Choose Us</h2>
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-16">
+    <div className="flex flex-col items-center">
+      <div className="bg-blue-900 text-white w-20 h-20 flex justify-center items-center rounded-lg text-2xl mb-4">
         <SmileOutlined />
       </div>
-      <div className="text-box">
-        <h3>Excellent Service</h3>
-        <p>We provide friendly and professional customer service to make your experience unforgettable.</p>
-      </div>
+      <h3 className="text-lg font-bold">Excellent Service</h3>
+      <p className="text-gray-600">We provide friendly and professional customer service to make your experience unforgettable.</p>
     </div>
-    <div className="why-us-item">
-      <div className="icon-box">
+    <div className="flex flex-col items-center">
+      <div className="bg-blue-900 text-white w-20 h-20 flex justify-center items-center rounded-lg text-2xl mb-4">
         <SafetyCertificateOutlined />
       </div>
-      <div className="text-box">
-        <h3>Guaranteed Safety</h3>
-        <p>Our equipment and boats comply with international safety standards.</p>
-      </div>
+      <h3 className="text-lg font-bold">Guaranteed Safety</h3>
+      <p className="text-gray-600">Our equipment and boats comply with international safety standards.</p>
     </div>
-    <div className="why-us-item">
-      <div className="icon-box">
+    <div className="flex flex-col items-center">
+      <div className="bg-blue-900 text-white w-20 h-20 flex justify-center items-center rounded-lg text-2xl mb-4">
         <StarOutlined />
       </div>
-      <div className="text-box">
-        <h3>Memorable Experiences</h3>
-        <p>Create lasting memories with our fun and exciting dolphin tours.</p>
-      </div>
+      <h3 className="text-lg font-bold">Memorable Experiences</h3>
+      <p className="text-gray-600">Create lasting memories with our fun and exciting dolphin tours.</p>
     </div>
   </div>
 </div>
 
 
-
-        {/* Special Offers Section */}
-        <div className="special-offers-container" data-aos="slide-up">
-          <h2 className="special-offers-title">Special Offers</h2>
-          <p className="special-offers-description">
-            Take advantage of exclusive discounts for a boat tour to see dolphins in Lovina. Book now for an unforgettable adventure at a special rate!
-          </p>
-          {/* Cards */}
-          <div className="cards-container" data-aos="slide-up">
-            {tours.map((tour) => (
+      <div className="text-center p-8">
+        <h2 className="text-3xl font-bold mb-6">Special Offers</h2>
+        <p className="text-gray-600 mb-8">Take advantage of exclusive discounts for a boat tour...</p>
+        <div className="flex flex-wrap justify-center gap-20">
+          {tours.map((tour) => (
+            <div
+              key={tour.id}
+              className="w-full md:w-1/4"
+              data-aos="fade-up" // AOS animation trigger
+            >
               <Card
-                key={tour.id}
                 hoverable
-                style={{
-                  width: 400,
-                  margin: '3px',
-                }}
-                cover={<img src={tour.image} alt={`Tour ${tour.id}`} className="card-img" />} data-aos="slide-up"
+                cover={<img alt={`Tour ${tour.id}`} src={tour.image} />}
+                actions={[
+                  <button
+                    className={`text-2xl ${tour.favorite ? 'text-red-500' : 'text-gray-400'}`}
+                    onClick={() => toggleFavorite(tour.id)}
+                  >
+                    {tour.favorite ? "❤️" : "🤍"}
+                  </button>,
+                  <button
+                    className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700"
+                    onClick={() => handleBooking(tour)}
+                  >
+                    Book Now
+                  </button>
+                ]}
               >
-                <div className="card-content">
-                  <p className="rating">⭐ {tour.rating}</p>
-                  <p className="price">{tour.price}</p>
-                  <p className="description">{tour.description}</p>
-                  <p className="package">{tour.package}</p>
-                  <div className="buttons-container">
-                    <button
-                      className={`favorite-btn ${tour.favorite ? 'favorite' : ''}`}
-                      onClick={() => toggleFavorite(tour.id)}
-                    >
-                      {tour.favorite ? "❤️" : "🤍"}
-                    </button>
-                    <button className="book-btn" onClick={() => handleBooking(tour)}>Book Now </button>
-                  </div>
-                </div>
+                <Card.Meta
+                  title={`⭐ ${tour.rating}`}
+                  description={<div><p className="text-blue-500 font-bold text-lg">{tour.price}</p><p className="text-gray-600 text-sm">{tour.description}</p><p className="text-green-500 font-semibold text-sm">{tour.package}</p></div>}
+                />
               </Card>
-            ))}
-          </div>
-
-          <div id="contact" className="contact" data-aos="slide-up">
-            <h2>Contact Us</h2>
-            <form className="contact-form">
-              <label htmlFor="name">Your Name</label>
-              <input type="text" id="name" placeholder="Enter your name" required />
-              <label htmlFor="email">Your Email</label>
-              <input type="email" id="email" placeholder="Enter your email" required />
-              <label htmlFor="message">Your Message</label>
-              <textarea id="message" placeholder="Enter your message" required></textarea>
-              <button type="submit" className="btn">Submit</button>
-            </form>
-          </div>
+            </div>
+          ))}
         </div>
+      </div>
+
+      <div id="contact" className="text-center p-8">
+        <h2 className="text-3xl font-bold mb-6">Contact Us</h2>
+        <form className="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-lg">
+          <label htmlFor="name" className="block text-lg font-bold mb-2">Your Name</label>
+          <input type="text" id="name" placeholder="Enter your name" className="w-full p-3 border rounded mb-4" required />
+          <label htmlFor="email" className="block text-lg font-bold mb-2">Your Email</label>
+          <input type="email" id="email" placeholder="Enter your email" className="w-full p-3 border rounded mb-4" required />
+          <label htmlFor="message" className="block text-lg font-bold mb-2">Your Message</label>
+          <textarea id="message" placeholder="Enter your message" className="w-full p-3 border rounded mb-4" required></textarea>
+          <button type="submit" className="bg-yellow-500 text-white py-3 px-6 rounded-full hover:bg-yellow-600">Submit</button>
+        </form>
       </div>
     </div>
   );

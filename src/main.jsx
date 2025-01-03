@@ -1,14 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client"; 
 import App from "./App"; 
-import { AuthProvider } from "./context/AuthContext"; // AuthProvider to wrap the app
+import { AuthProvider } from "./context/AuthContext"; 
 import "./index.css"; 
 
-const root = ReactDOM.createRoot(document.getElementById("root")); // Create root using createRoot
-
+const root = ReactDOM.createRoot(document.getElementById("root")); 
 root.render(
   <React.StrictMode>
-    <AuthProvider> {/* Wrap the app with AuthProvider */}
+    <AuthProvider> 
       <App />
     </AuthProvider>
   </React.StrictMode>

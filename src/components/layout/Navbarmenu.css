@@ -65,7 +65,7 @@
 }
 
 .nav-item a:hover {
-  background: rgb(0, 212, 212);
+  background: rgb(90, 197, 255);
 }
 
 .profile-dropdown {
@@ -87,7 +87,7 @@
   position: absolute;
   top: 50px; /* Adjust this value based on your layout */
   right: 0;
-  background:  rgb(0, 212, 212);
+  background:  rgb(90, 197, 255);
   box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   padding: 10px 0;
@@ -122,7 +122,7 @@
 }
 
 .dropdown-menu li:hover {
-  background-color: rgb(0, 175, 175);
+  background-color:  rgb(90, 197, 255);
 }
 
 .profile-dropdown:hover .dropdown-menu {
