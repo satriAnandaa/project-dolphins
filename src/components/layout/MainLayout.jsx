@@ -2,11 +2,12 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Navbarmenu from './Navbarmenu';
 
-function MainLayout() {
+function MainLayout({children}) {
   return (
     <div>
+      
       <Navbarmenu />
-      <Outlet />
+      {children}
     </div>
   );
 }

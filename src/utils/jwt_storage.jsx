@@ -11,6 +11,7 @@ const token_auth = "token_auth";
 
 export const jwtStorage = {
   async storeToken(token) {
+    console.log("store token",token)
     try {
       storage.setItem(token_auth, token);
     } catch (error) {

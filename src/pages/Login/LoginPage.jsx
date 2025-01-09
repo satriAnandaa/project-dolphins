@@ -5,27 +5,56 @@ import Google from "../../assets/Google.jpeg";
 import Instagram from "../../assets/Instagram.jpeg";
 import Background from "../../assets/act2.jpg";
 import { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+import { sendData } from "../../utils/api";
 
 const { Title } = Typography;
 const { Content } = Layout;
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  const { login } = useContext(AuthContext); // Ambil fungsi login dari AuthContext
-  const [username, setUsername] = useState("");
+  const [email, setemail] = useState("");
   const [password, setPassword] = useState("");
+  const { login, isLoggedIn, userProfile } = useContext(AuthContext);
+
+  if (isLoggedIn) {
+    if (userProfile.role === 2) {
+      return <Navigate to="/dashboard" replace />
+    } else if (userProfile.role === 1) {
+      return <Navigate to="/" replace />
+    }
+  }
+
 
   const handleLogin = async () => {
-    console.log(username, password);
+  try {
+    console.log("Debug: Preparing login form data...");
+    let formData = new FormData();
+    formData.append("email", email);
+    formData.append("password", password);
 
-    // Simulasikan login berhasil
-    const userData = { email: username }; // Data user simulasi (dapat diganti dengan hasil API login)
-    login(userData); // Panggil fungsi login dari AuthContext dengan data user
+    console.log("Debug: Sending login request to /api/v1/auth/login...");
+    const response = await sendData("/api/v1/auth/login", formData);
 
-    navigate("/", { replace: true });
-  };
+    console.log("Debug: Response received from server:", response);
+
+    if (response?.access_token) {
+      console.log("Debug: Access token received, proceeding to login...");
+      login(response.access_token);
+    } else {
+      console.warn("Debug: Login failed, no access token in response:", response);
+      // Uncomment if using unauthorized state
+      // setIsUnauthorized(true);
+    }
+  } catch (error) {
+    console.error("Debug: Error occurred during login:", error.message, error);
+
+    // Uncomment if using unauthorized state
+    // setIsUnauthorized(true);
+  }
+};
+
 
   return (
     <Layout className="bg-white fixed inset-0 overflow-hidden ">
@@ -58,25 +87,24 @@ const LoginPage = () => {
                 className="space-y-4"
               >
                 <Form.Item
-                  className="username input-slide-effect"
-                  label="Username"
-                  name="username"
+                  className="email input-slide-effect"
+                  label="email"
+                  name="email"
                   rules={[
-                    { required: true, message: "Please input your username!" },
+                    { required: true, message: "Please input your email!" },
                   ]}
                 >
                   <Input
-                    placeholder="Enter your username"
+                    placeholder="Enter your email"
                     prefix={
                       <div
-                        className={`input-prefix-wrapper ${
-                          username !== "" ? "input-prefix-hidden" : ""
-                        }`}
+                        className={`input-prefix-wrapper ${email !== "" ? "input-prefix-hidden" : ""
+                          }`}
                       >
                         <UserOutlined />
                       </div>
                     }
-                    onChange={(e) => setUsername(e.target.value)}
+                    onChange={(e) => setemail(e.target.value)}
                   />
                 </Form.Item>
 
@@ -92,9 +120,8 @@ const LoginPage = () => {
                     placeholder="Enter your password"
                     prefix={
                       <div
-                        className={`input-prefix-wrapper ${
-                          password !== "" ? "input-prefix-hidden" : ""
-                        }`}
+                        className={`input-prefix-wrapper ${password !== "" ? "input-prefix-hidden" : ""
+                          }`}
                       >
                         <LockOutlined />
                       </div>
@@ -114,7 +141,7 @@ const LoginPage = () => {
                     type="primary"
                     htmlType="submit"
                     className="w-full hover:bg-blue-500"
-                    disabled={username === "" || password === ""}
+                    disabled={email === "" || password === ""}
                   >
                     LOGIN
                   </Button>

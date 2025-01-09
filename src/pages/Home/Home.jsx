@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { SmileOutlined, SafetyCertificateOutlined, StarOutlined } from '@ant-design/icons';
+import { ChevronUp } from 'lucide-react';
 import { Card } from 'antd';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Carousel from 'react-bootstrap/Carousel';
@@ -8,6 +9,23 @@ import AOS from 'aos';
 import { useNavigate } from "react-router-dom";
 
 function Home() {
+  const [isVisible, setIsVisible] = useState(false);
+
+  const toggleVisibility = () => {
+    if (window.pageYOffset > 300) {
+      setIsVisible(true);
+    } else {
+      setIsVisible(false);
+    }
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  };
+
   const initialTours = [
     {
       id: 1,
@@ -85,10 +103,16 @@ function Home() {
       offset: 120,
       once: true,
     });
+
+    window.addEventListener("scroll", toggleVisibility);
+    return () => {
+      window.removeEventListener("scroll", toggleVisibility);
+    };
   }, []);
 
   return (
     <div className="w-full bg-gradient-to-b from-blue-100 to-white font-montserrat">
+      
       <div className="relative">
         <Carousel interval={700}>
           <Carousel.Item>
@@ -132,32 +156,31 @@ function Home() {
       </div>
 
       <div id="why-us" className="text-center p-8">
-  <h2 className="text-3xl font-bold mb-8">Why Choose Us</h2>
-  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-16">
-    <div className="flex flex-col items-center">
-      <div className="bg-blue-900 text-white w-20 h-20 flex justify-center items-center rounded-lg text-2xl mb-4">
-        <SmileOutlined />
+        <h2 className="text-3xl font-bold mb-8">Why Choose Us</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-16">
+          <div className="flex flex-col items-center">
+            <div className="bg-blue-900 text-white w-20 h-20 flex justify-center items-center rounded-lg text-2xl mb-4">
+              <SmileOutlined />
+            </div>
+            <h3 className="text-lg font-bold">Excellent Service</h3>
+            <p className="text-gray-600">We provide friendly and professional customer service to make your experience unforgettable.</p>
+          </div>
+          <div className="flex flex-col items-center">
+            <div className="bg-blue-900 text-white w-20 h-20 flex justify-center items-center rounded-lg text-2xl mb-4">
+              <SafetyCertificateOutlined />
+            </div>
+            <h3 className="text-lg font-bold">Guaranteed Safety</h3>
+            <p className="text-gray-600">Our equipment and boats comply with international safety standards.</p>
+          </div>
+          <div className="flex flex-col items-center">
+            <div className="bg-blue-900 text-white w-20 h-20 flex justify-center items-center rounded-lg text-2xl mb-4">
+              <StarOutlined />
+            </div>
+            <h3 className="text-lg font-bold">Memorable Experiences</h3>
+            <p className="text-gray-600">Create lasting memories with our fun and exciting dolphin tours.</p>
+          </div>
+        </div>
       </div>
-      <h3 className="text-lg font-bold">Excellent Service</h3>
-      <p className="text-gray-600">We provide friendly and professional customer service to make your experience unforgettable.</p>
-    </div>
-    <div className="flex flex-col items-center">
-      <div className="bg-blue-900 text-white w-20 h-20 flex justify-center items-center rounded-lg text-2xl mb-4">
-        <SafetyCertificateOutlined />
-      </div>
-      <h3 className="text-lg font-bold">Guaranteed Safety</h3>
-      <p className="text-gray-600">Our equipment and boats comply with international safety standards.</p>
-    </div>
-    <div className="flex flex-col items-center">
-      <div className="bg-blue-900 text-white w-20 h-20 flex justify-center items-center rounded-lg text-2xl mb-4">
-        <StarOutlined />
-      </div>
-      <h3 className="text-lg font-bold">Memorable Experiences</h3>
-      <p className="text-gray-600">Create lasting memories with our fun and exciting dolphin tours.</p>
-    </div>
-  </div>
-</div>
-
 
       <div className="text-center p-8">
         <h2 className="text-3xl font-bold mb-6">Special Offers</h2>
@@ -167,7 +190,7 @@ function Home() {
             <div
               key={tour.id}
               className="w-full md:w-1/4"
-              data-aos="fade-up" // AOS animation trigger
+              data-aos="fade-up"
             >
               <Card
                 hoverable
@@ -209,6 +232,17 @@ function Home() {
           <button type="submit" className="bg-yellow-500 text-white py-3 px-6 rounded-full hover:bg-yellow-600">Submit</button>
         </form>
       </div>
+
+      {isVisible && 
+        <div 
+          onClick={scrollToTop}
+          className="fixed bottom-4 right-4 cursor-pointer transform transition-transform duration-200 hover:scale-110"
+        >
+          <div className="bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg flex items-center justify-center">
+            <ChevronUp size={24} />
+          </div>
+        </div>
+      }
     </div>
   );
 }

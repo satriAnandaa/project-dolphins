@@ -14,7 +14,7 @@ import {
   Tooltip,
   Upload,
 } from "antd";
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import {
   InstagramOutlined,
   WhatsAppOutlined,
@@ -25,6 +25,8 @@ import {
 } from "@ant-design/icons";
 const { Title, Text } = Typography;
 import { useNavigate } from "react-router-dom";
+import { getDataPrivate } from "../../utils/api";
+import { AuthContext } from "../../context/AuthContext";
 
 const Profile = () => {
   // State untuk menyimpan data profile
@@ -97,8 +99,41 @@ const Profile = () => {
 
   const [notificationPage, setNotificationPage] = useState(1);
   const [favoritePage, setFavoritePage] = useState(1);
+  const [dataSource, setDataSource] = useState([]);
+  const [isLoading, setIsLoading] = useState(false)
+  const { userProfile } = useContext(AuthContext)
+
+
   const notificationsPerPage = 2;
   const favoritesPerPage = 4;
+
+
+  useEffect(() => {
+    getDataPackages()
+
+  }, [])
+
+  const getDataPackages = () => {
+    setIsLoading(true);
+    getDataPrivate("/api/v1/dolphin_packages/read/" + userProfile.user_id)
+      .then((resp) => {
+        setIsLoading(false);
+        if (resp?.data) {
+          // Menyaring hanya paket yang difavoritkan oleh user
+          const favoritePackages = resp.data.filter(item => item.is_favorite === 1);
+          setDataSource(favoritePackages); // Menyimpan hanya paket yang difavoritkan
+        } else {
+          console.log("Can't fetch data");
+        }
+      })
+      .catch((err) => {
+        setIsLoading(false);
+        console.log('Error:', err);
+      });
+  };
+  
+
+
 
   const onNotificationPageChange = (page) => {
     setNotificationPage(page);
@@ -160,9 +195,9 @@ const Profile = () => {
       <Row gutter={[24, 24]} justify="center">
         <Col span={24}>
           <Card className="border-none rounded-lg shadow-lg p-5 mb-5 relative overflow-hidden">
-            <div 
-              className="absolute inset-0 bg-cover bg-center filter blur-sm" 
-              style={{ backgroundImage: "url('/src/assets/lovina-2.jpg')" }} 
+            <div
+              className="absolute inset-0 bg-cover bg-center filter blur-sm"
+              style={{ backgroundImage: "url('/src/assets/lovina-2.jpg')" }}
             ></div>
             <div className="flex flex-col items-center relative z-10"> {/* Menggunakan Flexbox untuk memusatkan konten */}
               <div className="relative inline-block">
@@ -213,23 +248,23 @@ const Profile = () => {
         <Col span={24}>
           <Row gutter={[24, 24]}>
             <Col xs={24} md={12}>
-            <Card className="border-none rounded-lg shadow-lg p-5 mb-5 h-[490px]">
-              <Title level={4} className="text-center mb-5">BASIC INFO</Title>
-              <Form layout="vertical">
-                <div className="border-b border-gray-300 mb-2">
-                  <div className="py-2 flex justify-between items-center font-bold text-black"> 
-                    <Text>Field</Text>
-                    <Text>Value</Text>
+              <Card className="border-none rounded-lg shadow-lg p-5 mb-5 h-[490px]">
+                <Title level={4} className="text-center mb-5">BASIC INFO</Title>
+                <Form layout="vertical">
+                  <div className="border-b border-gray-300 mb-2">
+                    <div className="py-2 flex justify-between items-center font-bold text-black">
+                      <Text>Field</Text>
+                      <Text>Value</Text>
+                    </div>
                   </div>
-                </div>
-                {["name", "birthDate", "phone", "address"].map((field) => (
-                  <div key={field} className="py-3 flex justify-between items-center border-b border-gray-300 border-dashed">
-                    <Text className="text-black">{field.charAt(0).toUpperCase() + field.slice(1)}</Text> 
-                    <Text onClick={() => handleEdit(field)} className="cursor-pointer text-black hover:underline">{profileData[field]}</Text> 
-                  </div>
-                ))}
-              </Form>
-            </Card>
+                  {["name", "birthDate", "phone", "address"].map((field) => (
+                    <div key={field} className="py-3 flex justify-between items-center border-b border-gray-300 border-dashed">
+                      <Text className="text-black">{field.charAt(0).toUpperCase() + field.slice(1)}</Text>
+                      <Text onClick={() => handleEdit(field)} className="cursor-pointer text-black hover:underline">{profileData[field]}</Text>
+                    </div>
+                  ))}
+                </Form>
+              </Card>
 
               <Card className="border-none rounded-lg shadow-lg p-5 mb-5 h-[430px] overflow-y-auto">
                 <Title level={4} className="text-center mb-5">FRIEND'S</Title>
@@ -292,46 +327,48 @@ const Profile = () => {
         </Col>
 
         <Col span={24}>
-        <Card className="border-none rounded-lg shadow-lg p-5 mb-5">
-          <Title level={4} className="text-center mb-5">FAVORITE TOUR</Title>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"> {/* Mengatur grid untuk 4 kolom di layar besar */}
-            {favoriteData.map((tour) => (
-              <div key={tour.id} className="border rounded-lg shadow-lg overflow-hidden">
-                <img src={tour.image} alt={`Tour ${tour.id}`} className="w-full h-40 object-cover" />
-                <div className="p-4">
-                  <p className="text-lg font-semibold">⭐ {tour.rating}</p>
-                  <p className="text-xl font-bold">{tour.price}</p>
-                  <p className="text-gray-700">{tour.description}</p>
-                  <p className="text-gray-500">{tour.package}</p>
-                  <div className="flex justify-between mt-4">
-                    <button
-                      className={`text-2xl ${tour.favorite ? 'text-red-500' : 'text-gray-400'}`}
-                      onClick={() => toggleFavorite(tour.id)}
-                    >
-                      {tour.favorite ? "❤️" : "🤍"}
-                    </button>
-                    <button
-                      className="px-4 py-2 bg-blue-500 text-white rounded-lg"
-                      onClick={() => handleBooking(tour)}
-                    >
-                      Book Now
-                    </button>
+          <Card className="border-none rounded-lg shadow-lg p-5 mb-5">
+            <Title level={4} className="text-center mb-5">FAVORITE TOUR</Title>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {dataSource?.map((tour) => (
+                <div key={tour.id} className="border rounded-lg shadow-lg overflow-hidden">
+                  <img src={tour.image} alt={`Tour ${tour.id}`} className="w-full h-40 object-cover" />
+                  <div className="p-4">
+                    <p className="text-lg font-semibold">⭐ {tour.rating}</p>
+                    <p className="text-xl font-bold">{tour.price}</p>
+                    <p className="text-gray-700">{tour.description}</p>
+                    <p className="text-gray-500">{tour.package}</p>
+                    <p className="text-sm text-gray-600">Seats Available: {tour.seat_available}</p>
+                    <div className="flex justify-between mt-4">
+                      <button
+                        className={`text-2xl ${tour.favorite ? 'text-red-500' : 'text-gray-400'}`}
+                        onClick={() => toggleFavorite(tour.id)}
+                      >
+                        {tour.is_favorite ? "❤️" : "🤍"}
+                      </button>
+                      <button
+                        className="px-4 py-2 bg-blue-500 text-white rounded-lg"
+                        onClick={() => handleBooking(tour)}
+                      >
+                        Book Now
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-          <Pagination
-            className="mt-10"
-            current={favoritePage}
-            pageSize={favoritesPerPage}
-            total={tours.length}
-            onChange={onFavoritePageChange}
-            simple
-          />
-        </Card>
-      </Col>
-    </Row>
+              ))}
+            </div>
+            <Pagination
+              className="mt-10"
+              current={favoritePage}
+              pageSize={favoritesPerPage}
+              total={dataSource.length} // Menggunakan length dari dataSource yang sudah difilter
+              onChange={onFavoritePageChange}
+              simple
+            />
+          </Card>
+
+        </Col>
+      </Row>
 
       <Drawer
         title={

@@ -1,18 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import * as Icons from "react-icons/gi"; 
 import "./Navbarmenu.css";
 import { navItems } from "./NavItem";
 import Button from "../Button/Button";
 import Dropdown from "../Dropdown/Dropdown";
-import { useAuth } from "../../context/AuthContext"; // Import useAuth untuk autentikasi
+import { AuthContext} from "../../context/AuthContext"; // Import useAuth untuk autentikasi
 
 function Navbarmenu() {
   const [dropdown, setDropdown] = useState(false);
   const [profileDropdown, setProfileDropdown] = useState(false); // State untuk profile dropdown
   const [isHovered, setIsHovered] = useState(false); // State untuk mencegah dropdown hilang terlalu cepat
-  const { isLoggedIn, logout } = useAuth(); // Mengambil status login dan fungsi logout dari AuthContext
-
+  const { isLoggedIn, logout } = useContext(AuthContext); 
   return (
     <>
       <nav className="navbar">

@@ -69,6 +69,26 @@ export const sendData = async (url, data) => {
     .catch((err) => console.log(err));
 };
 
+export const sendDataJSON = async (url, data) => {
+  return fetch(REACT_APP_API_URL + url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json", // Tambahkan header ini
+    },
+    body: JSON.stringify(data), // Pastikan data diubah menjadi JSON string
+  })
+    .then((response) =>
+      response.status >= 200 &&
+      response.status <= 299 &&
+      response.status !== 204
+        ? response.json()
+        : response,
+    )
+    .then((data) => data)
+    .catch((err) => console.log(err));
+};
+
+
 export const sendDataPrivate = async (url, data) => {
   //401 -> jwt expired, flow process to login
   //400 -> jwt malformed
