@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { FloatButton, Tooltip, InputNumber, Divider, DatePicker, notification } from "antd";
 import { WhatsAppOutlined } from "@ant-design/icons";
 import { AuthContext } from "../../context/AuthContext";
-import { sendDataPrivate } from "../../utils/api";
+import { getDataPrivate, sendDataPrivate } from "../../utils/api";
 
 const BookingPage = () => {
   const location = useLocation();
@@ -16,6 +16,7 @@ const BookingPage = () => {
   const [numPeople, setNumPeople] = useState(1);
   const [imageUrl, setImageUrl] = useState("");  // State for image URL
   const { userProfile } = useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState(true)
 
   const maxSeatsAvailable = selectedCard.capacity;
   const navigate = useNavigate();
@@ -24,12 +25,15 @@ const BookingPage = () => {
   useEffect(() => {
     const fetchImage = async () => {
       try {
-        const response = await sendDataPrivate(`api/v1/bookings/packages/image/${selectedCard.package_id}`);
-        if (response?.image) {
-          setImageUrl(response.image);  // Set the image URL in the state
+        const response = await getDataPrivate(`api/v1/bookings/packages/image/${selectedCard.package_id}`);
+        if (response?.package_image) {
+          console.log(response)
+          setImageUrl(response.package_image);
         }
       } catch (error) {
         console.error("Error fetching image:", error);
+      } finally {
+        setIsLoading(false)  // Set the image URL in the state
       }
     };
 
@@ -126,9 +130,10 @@ const BookingPage = () => {
   return (
     <div className="booking-page">
       {/* Informasi Paket */}
+      {isLoading ? "" : console.log(imageUrl)}
       <div className="info-section">
         <img
-          src= {imageUrl} 
+          src={isLoading ? "" : `http://localhost:5000/static/show_image/${imageUrl}`}
           alt="Selected"
           className="card-image"
         />

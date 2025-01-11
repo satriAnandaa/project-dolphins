@@ -102,10 +102,10 @@ function AllPackage() {
 
   const filterByPrice = (tour) => {
     const price = parseInt(tour.price.replace("IDR ", "").replace(".", ""));
-    if (filter === "cheap") {
+    if (filter === "watch dolphin") {
       return price <= 5.00; // Filter untuk harga murah
-    } else if (filter === "premium") {
-      return price > 5.00; // Filter untuk harga premium
+    } else if (filter === "snorkeling") {
+      return price > 5.00; // Filter untuk harga snorkeling
     }
     return true; // Jika tidak ada filter, tampilkan semua paket
   };
@@ -220,16 +220,16 @@ function AllPackage() {
               All Packages
             </button>
             <button
-              className={`py-2 px-4 rounded-md ${filter === "cheap" ? "bg-blue-500 text-white" : "bg-gray-200"}`}
-              onClick={() => setFilter("cheap")}
+              className={`py-2 px-4 rounded-md ${filter === "watch dolphin" ? "bg-blue-500 text-white" : "bg-gray-200"}`}
+              onClick={() => setFilter("watch dolphin")}
             >
-              Cheap
+              watch dolphin
             </button>
             <button
-              className={`py-2 px-4 rounded-md ${filter === "premium" ? "bg-blue-500 text-white" : "bg-gray-200"}`}
-              onClick={() => setFilter("premium")}
+              className={`py-2 px-4 rounded-md ${filter === "snorkeling" ? "bg-blue-500 text-white" : "bg-gray-200"}`}
+              onClick={() => setFilter("snorkeling")}
             >
-              Premium
+              Snorkeling
             </button>
           </div>
         </div>

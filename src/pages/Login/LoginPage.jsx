@@ -1,6 +1,6 @@
 import { Layout, Button, Row, Col, Typography, Form, Input, Card } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import SignBG from "../../assets/WADOL.jpg";
+import SignBG from "../../assets/wadol.png";
 import Google from "../../assets/Google.jpeg";
 import Instagram from "../../assets/Instagram.jpeg";
 import Background from "../../assets/act2.jpg";

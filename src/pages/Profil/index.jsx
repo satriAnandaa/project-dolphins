@@ -332,7 +332,7 @@ const Profile = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {dataSource?.map((tour) => (
                 <div key={tour.id} className="border rounded-lg shadow-lg overflow-hidden">
-                  <img src={tour.image} alt={`Tour ${tour.id}`} className="w-full h-40 object-cover" />
+                  <img src={`http://localhost:5000/static/show_image/${tour.package_image}`} alt={`Tour ${tour.id}`} className="w-full h-40 object-cover" />
                   <div className="p-4">
                     <p className="text-lg font-semibold">⭐ {tour.rating}</p>
                     <p className="text-xl font-bold">{tour.price}</p>
